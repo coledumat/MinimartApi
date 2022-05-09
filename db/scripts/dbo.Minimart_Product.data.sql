@@ -1,0 +1,8 @@
+﻿INSERT INTO [dbo].[Minimart_Product] ([Id_Minimart], [Id_Product], [Stock], [MinimumStock]) VALUES (1, 1, 10, 5)
+INSERT INTO [dbo].[Minimart_Product] ([Id_Minimart], [Id_Product], [Stock], [MinimumStock]) VALUES (1, 2, 4, 5)
+INSERT INTO [dbo].[Minimart_Product] ([Id_Minimart], [Id_Product], [Stock], [MinimumStock]) VALUES (1, 13, 10, 5)
+INSERT INTO [dbo].[Minimart_Product] ([Id_Minimart], [Id_Product], [Stock], [MinimumStock]) VALUES (1, 14, 4, 5)
+INSERT INTO [dbo].[Minimart_Product] ([Id_Minimart], [Id_Product], [Stock], [MinimumStock]) VALUES (2, 3, 4, 5)
+INSERT INTO [dbo].[Minimart_Product] ([Id_Minimart], [Id_Product], [Stock], [MinimumStock]) VALUES (2, 4, 10, 5)
+INSERT INTO [dbo].[Minimart_Product] ([Id_Minimart], [Id_Product], [Stock], [MinimumStock]) VALUES (2, 11, 4, 5)
+INSERT INTO [dbo].[Minimart_Product] ([Id_Minimart], [Id_Product], [Stock], [MinimumStock]) VALUES (2, 17, 10, 5)

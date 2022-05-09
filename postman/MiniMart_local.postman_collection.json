@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "0e4cf837-6f4a-4cc3-9f78-c8e1b55092fb",
+		"name": "MiniMart_local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44386/api/product/list?CategoryName=Soda",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"product",
+						"list"
+					],
+					"query": [
+						{
+							"key": "ProductId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "ProductName",
+							"value": "c",
+							"disabled": true
+						},
+						{
+							"key": "CategoryId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "CategoryName",
+							"value": "Soda"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Minimart Products",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44386/api/Minimart/Product/list?MinimartName=downtown&CategoryName=soda",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"Minimart",
+						"Product",
+						"list"
+					],
+					"query": [
+						{
+							"key": "MinimartId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "MinimartName",
+							"value": "downtown"
+						},
+						{
+							"key": "ProductId",
+							"value": "3",
+							"disabled": true
+						},
+						{
+							"key": "ProductName",
+							"value": "raviolo",
+							"disabled": true
+						},
+						{
+							"key": "CategoryId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "CategoryName",
+							"value": "soda"
+						},
+						{
+							"key": "LowStock",
+							"value": "true",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VirtualCart Products",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44386/api/VirtualCart/Product/list?CustomerFullName=John",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"VirtualCart",
+						"Product",
+						"list"
+					],
+					"query": [
+						{
+							"key": "MinimartId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "MinimartName",
+							"value": "downtown",
+							"disabled": true
+						},
+						{
+							"key": "CustomerId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "CustomerFullName",
+							"value": "John"
+						},
+						{
+							"key": "ProductId",
+							"value": "3",
+							"disabled": true
+						},
+						{
+							"key": "ProductName",
+							"value": "raviolo",
+							"disabled": true
+						},
+						{
+							"key": "CategoryId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "CategoryName",
+							"value": "soda",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VirtualCart ProductVouchers",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44386/api/VirtualCart/ProductVoucher/list?CustomerId=1&CategoryName=soda",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"VirtualCart",
+						"ProductVoucher",
+						"list"
+					],
+					"query": [
+						{
+							"key": "MinimartId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "MinimartName",
+							"value": "downtown",
+							"disabled": true
+						},
+						{
+							"key": "CustomerId",
+							"value": "1"
+						},
+						{
+							"key": "CustomerFullName",
+							"value": "John",
+							"disabled": true
+						},
+						{
+							"key": "VoucherId",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "VoucherNum",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "ProductId",
+							"value": "3",
+							"disabled": true
+						},
+						{
+							"key": "ProductName",
+							"value": "raviolo",
+							"disabled": true
+						},
+						{
+							"key": "CategoryId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "CategoryName",
+							"value": "soda"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,6 @@
+﻿SET IDENTITY_INSERT [dbo].[Category] ON
+INSERT INTO [dbo].[Category] ([Id], [Name], [Description]) VALUES (1, N'Soda                                                                                                                                                                                                    ', NULL)
+INSERT INTO [dbo].[Category] ([Id], [Name], [Description]) VALUES (2, N'Food                                                                                                                                                                                                    ', NULL)
+INSERT INTO [dbo].[Category] ([Id], [Name], [Description]) VALUES (3, N'Cleaning                                                                                                                                                                                                ', NULL)
+INSERT INTO [dbo].[Category] ([Id], [Name], [Description]) VALUES (4, N'Bathroom                                                                                                                                                                                                ', NULL)
+SET IDENTITY_INSERT [dbo].[Category] OFF
