@@ -158,7 +158,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Business\BMinimart.cs" />
     <Compile Include="Business\BMinimartProduct.cs" />
+    <Compile Include="Business\BCustomer.cs" />
     <Compile Include="Business\BVirtualCartProductVoucher.cs" />
     <Compile Include="Business\BVirtualCartProduct.cs" />
     <Compile Include="Business\BProduct.cs" />
@@ -172,6 +174,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Minimart.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\VirtualCartProductVoucher.cs" />
     <Compile Include="Models\VirtualCartProduct .cs" />
     <Compile Include="Models\MinimartProduct .cs" />

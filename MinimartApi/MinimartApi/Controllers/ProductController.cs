@@ -20,18 +20,6 @@ namespace MinimartApi.Controllers
          CRUD methods of Categories and Products.
         */
 
-        //master
-        //Data Source = (localdb)\MSSQLLocalDB;Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
-        //minimart
-        //Data Source = (localdb)\MSSQLLocalDB;Initial Catalog = C:\MCO\FUENTES\PRUEBAS\VISUALSTUDIO\MMAPI\MINIMARTAPI\DB\MINIMARTAPI.MDF;Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
-
-        //private string connection_string = System.Configuration.ConfigurationManager.ConnectionStrings["Connection_name"].ToString(); //mco
-        //private const string CONNECTION_STRING = "Server=.;Database=MinimartApi.mdf;Trusted_Connection=True;"; //mco
-
-        //esta:
-        //private const string CONNECTION_STRING = "Data Source = (localdb)\\MSSQLLocalDB;Initial Catalog = C:\\MCO\\FUENTES\\PRUEBAS\\VISUALSTUDIO\\MMAPI\\MINIMARTAPI\\DB\\MINIMARTAPI.MDF;Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
-
         private BProduct product;
 
         ProductController  ()
@@ -40,12 +28,10 @@ namespace MinimartApi.Controllers
         
         }
 
-        // GET: api/MiniMart
-        /*
-        <myAuthorize(Funcion:=openASW.Seguridad.Functions.ASW_Pago_Sin_Factura)>
-        <HttpGet>
-        <Route("consultadeuda/{Suministro:int}")>
-       */
+
+        //Type Product
+        // ////////////
+
         [HttpGet]
         [Route("api/product/list")]
         public IEnumerable<Product> GetProducts( int productId = 0, string productName = "", int categoryId = 0, string categoryName ="") //mco
@@ -54,7 +40,32 @@ namespace MinimartApi.Controllers
         }
 
 
+        [HttpPost]
+        [Route("api/product")]
+        public int PostProduct([FromBody] Product newProduct)
+        {   //add a new type of product 
 
+            int id = 0;
+            //insert into Minimart_Product Table
+            return id;
+        }
+
+        [HttpPut]
+        [Route("api/product")]
+        public void PutProduct([FromBody] Product aProduct)
+        {   //update a type of product 
+
+        }
+
+
+        [HttpDelete]
+        [Route("api/product")]
+        public void DeleteProduct(int id)
+        { //delete a type of product
+
+        }
+
+        /*
         // GET: api/MiniMart
         public IEnumerable<string> Get()
         {
@@ -81,5 +92,6 @@ namespace MinimartApi.Controllers
         public void Delete(int id)
         {
         }
+        */
     }
 }

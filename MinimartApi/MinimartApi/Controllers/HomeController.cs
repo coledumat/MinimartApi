@@ -10,7 +10,7 @@ namespace MinimartApi.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Minimart Home Page";
 
             return View();
         }

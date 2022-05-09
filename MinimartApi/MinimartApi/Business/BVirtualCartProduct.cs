@@ -16,7 +16,7 @@ namespace MinimartApi.Business
     public class BVirtualCartProduct
     {
         /*
-          Business Class Product.
+          Business Class VirtualCart Product.
         */
         private string CONNECTION_STRING = "";
 
@@ -26,8 +26,8 @@ namespace MinimartApi.Business
             CONNECTION_STRING = "Data Source = (localdb)\\MSSQLLocalDB;Initial Catalog = C:\\MCO\\FUENTES\\PRUEBAS\\VISUALSTUDIO\\MMAPI\\MINIMARTAPI\\DB\\MINIMARTAPI.MDF;Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         }
 
-        public IEnumerable<VirtualCartProduct> listar(int minimartId, string minimartName, 
-                                                      int costumerId, string customerFullName, 
+        public IEnumerable<VirtualCartProduct> listar(int minimartId, string minimartName,
+                                                      int costumerId, string customerFullName,
                                                       int productId, string productName, int categoryId, string categoryName)
         {
             using (IDbConnection connection = new SqlConnection(CONNECTION_STRING))
@@ -48,11 +48,19 @@ namespace MinimartApi.Business
 
         }
 
+        public IEnumerable<VirtualCartProduct> totalize(int minimartId, int costumerId)
+        {
+            using (IDbConnection connection = new SqlConnection(CONNECTION_STRING))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("minimart_id", minimartId);
+                parameters.Add("customer_id", costumerId);
 
-
-
-
+                //TODO: Create sp for totalize
+                var virtualCartProducts = connection.Query<VirtualCartProduct>("SP_VirtualCartProduct", param: parameters, commandType: CommandType.StoredProcedure);
+                return virtualCartProducts;
+            }
+        }
 
     }
-
 }
