@@ -166,6 +166,7 @@
     <Compile Include="Business\BVirtualCartProductVoucher.cs" />
     <Compile Include="Business\BVirtualCartProduct.cs" />
     <Compile Include="Business\BProduct.cs" />
+    <Compile Include="Business\BusinessClass.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MinimartController.cs" />

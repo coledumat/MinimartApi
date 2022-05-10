@@ -3,33 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-//mco [
 using Dapper;
 using System.Data;
 using System.Data.SqlClient;
 
 using MinimartApi.Models;
-// mco ]
 
-namespace MinimartApi.Business
+namespace MinimartApi.Business 
 {
-    public class BCustomer
+    public class BCustomer : BusinessClass
     {
         /*
           Business Class Customer.
         */
 
-        private string CONNECTION_STRING = "";
-
-        public BCustomer()
-        {
-            //TODO: read from de config file
-            CONNECTION_STRING = "Data Source = (localdb)\\MSSQLLocalDB;Initial Catalog = C:\\MCO\\FUENTES\\PRUEBAS\\VISUALSTUDIO\\MMAPI\\MINIMARTAPI\\DB\\MINIMARTAPI.MDF;Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        }
-
         public IEnumerable<Customer> list(int customerId, string customerFullName, string email)
         {
-            using (IDbConnection connection = new SqlConnection(CONNECTION_STRING))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("customer_id", customerId );

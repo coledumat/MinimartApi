@@ -3,34 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-//mco [
 using Dapper;
 using System.Data;
 using System.Data.SqlClient;
 
 using MinimartApi.Models;
-// mco ]
 
 namespace MinimartApi.Business
 {
-    public class BVirtualCartProduct
+    public class BVirtualCartProduct : BusinessClass
     {
         /*
           Business Class VirtualCart Product.
         */
-        private string CONNECTION_STRING = "";
-
-        public BVirtualCartProduct()
-        {
-            //TODO: read from de config file
-            CONNECTION_STRING = "Data Source = (localdb)\\MSSQLLocalDB;Initial Catalog = C:\\MCO\\FUENTES\\PRUEBAS\\VISUALSTUDIO\\MMAPI\\MINIMARTAPI\\DB\\MINIMARTAPI.MDF;Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        }
 
         public IEnumerable<VirtualCartProduct> list(int minimartId, string minimartName,
                                                     int customerId, string customerFullName,
                                                     int productId, string productName, int categoryId, string categoryName)
         {
-            using (IDbConnection connection = new SqlConnection(CONNECTION_STRING))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("minimart_id", minimartId);
@@ -53,7 +44,7 @@ namespace MinimartApi.Business
                                                               int productId, string productName, int categoryId, string categoryName,
                                                               int voucherId , int voucherNum)
         {
-            using (IDbConnection connection = new SqlConnection(CONNECTION_STRING))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("minimart_id", miniMartId);
