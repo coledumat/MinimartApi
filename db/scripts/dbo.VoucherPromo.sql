@@ -8,7 +8,7 @@
     [StartDate]          DATE        NOT NULL,
     [EndDate]            DATE        NOT NULL,
     [WeekDays]           NCHAR (200) NOT NULL,
-    [StartingWhitXUnits] INT         NOT NULL,
+    [StartingWithXUnits] INT         NOT NULL,
     [UnitOnDiscount]     INT         NOT NULL,
     [PercentageDiscount] INT         NOT NULL,
     [TipoVoucher]        INT         DEFAULT ((1)) NOT NULL,

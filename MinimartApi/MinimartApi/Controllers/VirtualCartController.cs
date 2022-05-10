@@ -66,9 +66,9 @@ namespace MinimartApi.Controllers
                 float discount = 0;
                 foreach (var productVoucher in virtualCartProductVoucher_aux)
                 {//for each voucher apply its discount
-                    if (productVoucher.StartingWhitXUnits <= productWDiscount.Units)
+                    if (productVoucher.StartingWithXUnits <= productWDiscount.Units)
                     {
-                        discount += ((productWDiscount.Price * productVoucher.PercentageDiscount / 100) * (productWDiscount.Units / productVoucher.StartingWhitXUnits));
+                        discount += ((productWDiscount.Price * productVoucher.PercentageDiscount / 100) * (productWDiscount.Units / productVoucher.StartingWithXUnits));
                     }
                 }
                 productWDiscount.SubtotalWithDiscount = productWDiscount.SubtotalProduct - discount;

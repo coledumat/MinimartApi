@@ -19,7 +19,7 @@ namespace MinimartApi.Models
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 		public String  WeekDays { get; set; }
-		public int StartingWhitXUnits { get; set; }
+		public int StartingWithXUnits { get; set; }
 		public int UnitOnDiscount { get; set; }
 		public int PercentageDiscount { get; set; }
 	    //public int TipoVoucher { get; set; }

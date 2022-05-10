@@ -32,7 +32,7 @@ begin
 		   vp.StartDate,
 		   vp.EndDate,
 		   LTrim(RTrim(vp.WeekDays)) as WeekDays,
-		   vp.StartingWhitXUnits,
+		   vp.StartingWithXUnits,
 		   vp.UnitOnDiscount,
 		   vp.PercentageDiscount,
 		   vp.TipoVoucher,

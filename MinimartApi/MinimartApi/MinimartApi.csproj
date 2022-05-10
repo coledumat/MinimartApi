@@ -163,6 +163,7 @@
     <Compile Include="Business\BMinimartProduct.cs" />
     <Compile Include="Business\BCustomer.cs" />
     <Compile Include="Business\BCategory.cs" />
+    <Compile Include="Business\BVoucherPromo.cs" />
     <Compile Include="Business\BVirtualCartProductVoucher.cs" />
     <Compile Include="Business\BVirtualCartProduct.cs" />
     <Compile Include="Business\BProduct.cs" />

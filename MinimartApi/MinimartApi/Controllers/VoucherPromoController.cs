@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 
 using MinimartApi.Models;
+using MinimartApi.Business;
+
 
 namespace MinimartApi.Controllers
 {
@@ -15,19 +17,48 @@ namespace MinimartApi.Controllers
         CRUD methods of VoucherPromo (CategoryVoucherPromo and ProductVucherPromo).
        */
 
+        private BVoucherPromo vouchersPromos;
+
+        VoucherPromoController()
+        {
+            vouchersPromos = new BVoucherPromo();
+        }
+
+
+
         // ////////////////
         //product Voucher Promo
         // ////////////////
 
+        [HttpGet]
+        [Route("api/VoucherPromo/product/list")]
+        public IEnumerable<ProductVoucherPromo> GetProductVouchers(int miniMartId = 0, string minimartName = "",
+                                                                         int voucherId = 0, 
+                                                                         int categoryId = 0, string categoryName = "", int productId = 0, string productName = "")
+        { //return products in a vituarcartProductVoucher
+            return vouchersPromos.listProductVoucherPromos(miniMartId, minimartName, voucherId, categoryId, categoryName, productId, productName);
+        }
+
 
         [HttpPost]
         [Route("api/VoucherPromo/product")]
-        public int PostProductVoucherPromo([FromBody] ProductVoucherPromo newProductVoucherPromo)
+        public IHttpActionResult PostProductVoucherPromo([FromBody] ProductVoucherPromoModel newProductVoucherPromo)
         {   //add a new type of ProductVoucherPromo 
+            
+            if ( newProductVoucherPromo == null ) {
+                return BadRequest("Inicializar parametros");
+            }
 
-            int id = 0;
-            //insert into VoucherPromo and ProductVoucherPromo Tables
-            return id;
+            if (! ModelState.IsValid) {
+                return BadRequest(modelState:ModelState);
+            }
+
+            int result = vouchersPromos.CreateProductVoucherPromo( newProductVoucherPromo);
+
+            if (result == 1)
+                return Ok();
+            else
+                return InternalServerError(); 
         }
 
         [HttpPut]

@@ -17,7 +17,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44386/api/product/list?CategoryName=Soda",
+					"raw": "https://localhost:44386/api/product/list?CategoryId=1",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -30,6 +30,15 @@
 					],
 					"query": [
 						{
+							"key": "CategoryId",
+							"value": "1"
+						},
+						{
+							"key": "CategoryName",
+							"value": "Soda",
+							"disabled": true
+						},
+						{
 							"key": "ProductId",
 							"value": "1",
 							"disabled": true
@@ -38,15 +47,6 @@
 							"key": "ProductName",
 							"value": "c",
 							"disabled": true
-						},
-						{
-							"key": "CategoryId",
-							"value": "1",
-							"disabled": true
-						},
-						{
-							"key": "CategoryName",
-							"value": "Soda"
 						}
 					]
 				}
@@ -54,7 +54,7 @@
 			"response": []
 		},
 		{
-			"name": "Minimart Products",
+			"name": "Minimart Poduct Voucher Promo",
 			"protocolProfileBehavior": {
 				"strictSSL": false
 			},
@@ -65,7 +65,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44386/api/Minimart/Product/list?LowStock=true",
+					"raw": "https://localhost:44386/api/VoucherPromo/product/list",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -73,8 +73,8 @@
 					"port": "44386",
 					"path": [
 						"api",
-						"Minimart",
-						"Product",
+						"VoucherPromo",
+						"product",
 						"list"
 					],
 					"query": [
@@ -89,13 +89,8 @@
 							"disabled": true
 						},
 						{
-							"key": "ProductId",
-							"value": "3",
-							"disabled": true
-						},
-						{
-							"key": "ProductName",
-							"value": "raviolo",
+							"key": "VoucherId",
+							"value": "1",
 							"disabled": true
 						},
 						{
@@ -109,9 +104,51 @@
 							"disabled": true
 						},
 						{
-							"key": "LowStock",
-							"value": "true"
+							"key": "ProductId",
+							"value": "3",
+							"disabled": true
+						},
+						{
+							"key": "ProductName",
+							"value": "raviolo",
+							"disabled": true
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Minimart Poduct Voucher Promo  Crear",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"MinimartId\": 1,\r\n\"VIniNumber\" : 1,\r\n\"VEndNumber\":10,\r\n\"Name\":\"MyVoucherTest\",\r\n\"Description\": \"voucher discount for soda drinks: pay 2 take 3\",\r\n\"StartDate\": \"2022-05-01T00:00:00\",\r\n\"EndDate\": \"2022-05-31T00:00:00\",\r\n\"WeekDays\": [\"Sunday\",\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\"],\r\n\"StartingWithXUnits\": 3,\r\n\"UnitOnDiscount\": 3,\r\n\"PercentageDiscount\": 100,\r\n\"includeProducts\":[{\"CategoryId\": 1,\r\n                    \"ProductId\": 2}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44386/api/VoucherPromo/product",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"VoucherPromo",
+						"product"
 					]
 				}
 			},
@@ -129,7 +166,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44386/api/VirtualCart/Product/list",
+					"raw": "https://localhost:44386/api/VirtualCart/Product/list?MinimartName=downtown&CategoryName=soda",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -149,8 +186,7 @@
 						},
 						{
 							"key": "MinimartName",
-							"value": "downtown",
-							"disabled": true
+							"value": "downtown"
 						},
 						{
 							"key": "CustomerId",
@@ -163,6 +199,15 @@
 							"disabled": true
 						},
 						{
+							"key": "CategoryId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "CategoryName",
+							"value": "soda"
+						},
+						{
 							"key": "ProductId",
 							"value": "3",
 							"disabled": true
@@ -171,16 +216,6 @@
 							"key": "ProductName",
 							"value": "raviolo",
 							"disabled": true
-						},
-						{
-							"key": "CategoryId",
-							"value": "1",
-							"disabled": true
-						},
-						{
-							"key": "CategoryName",
-							"value": "soda",
-							"disabled": true
 						}
 					]
 				}
@@ -188,7 +223,7 @@
 			"response": []
 		},
 		{
-			"name": "VirtualCart ProductVouchers",
+			"name": "VirtualCart Product Vouchers",
 			"protocolProfileBehavior": {
 				"strictSSL": false
 			},
@@ -199,7 +234,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44386/api/VirtualCart/ProductVoucher/list?MinimartId=1&CategoryName=soda",
+					"raw": "https://localhost:44386/api/VirtualCart/ProductVoucher/list?MinimartName=downtown&CustomerId=1",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -214,17 +249,16 @@
 					"query": [
 						{
 							"key": "MinimartId",
-							"value": "1"
+							"value": "1",
+							"disabled": true
 						},
 						{
 							"key": "MinimartName",
-							"value": "downtown",
-							"disabled": true
+							"value": "downtown"
 						},
 						{
 							"key": "CustomerId",
-							"value": "1",
-							"disabled": true
+							"value": "1"
 						},
 						{
 							"key": "CustomerFullName",
@@ -242,6 +276,16 @@
 							"disabled": true
 						},
 						{
+							"key": "CategoryId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "CategoryName",
+							"value": "soda",
+							"disabled": true
+						},
+						{
 							"key": "ProductId",
 							"value": "3",
 							"disabled": true
@@ -250,15 +294,6 @@
 							"key": "ProductName",
 							"value": "raviolo",
 							"disabled": true
-						},
-						{
-							"key": "CategoryId",
-							"value": "1",
-							"disabled": true
-						},
-						{
-							"key": "CategoryName",
-							"value": "soda"
 						}
 					]
 				}
@@ -266,7 +301,7 @@
 			"response": []
 		},
 		{
-			"name": "VirtualCart ProductsWDiscount",
+			"name": "VirtualCart Products Discount",
 			"protocolProfileBehavior": {
 				"strictSSL": false
 			},
@@ -277,7 +312,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44386/api/VirtualCart/Product/listWDiscount?CustomerFullName=John",
+					"raw": "https://localhost:44386/api/VirtualCart/Product/listWDiscount?MinimartId=1&MinimartName=downtown&CustomerFullName=John",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -292,13 +327,11 @@
 					"query": [
 						{
 							"key": "MinimartId",
-							"value": "1",
-							"disabled": true
+							"value": "1"
 						},
 						{
 							"key": "MinimartName",
-							"value": "downtown",
-							"disabled": true
+							"value": "downtown"
 						},
 						{
 							"key": "CustomerId",
@@ -310,16 +343,6 @@
 							"value": "John"
 						},
 						{
-							"key": "ProductId",
-							"value": "3",
-							"disabled": true
-						},
-						{
-							"key": "ProductName",
-							"value": "raviolo",
-							"disabled": true
-						},
-						{
 							"key": "CategoryId",
 							"value": "1",
 							"disabled": true
@@ -327,6 +350,16 @@
 						{
 							"key": "CategoryName",
 							"value": "soda",
+							"disabled": true
+						},
+						{
+							"key": "ProductId",
+							"value": "3",
+							"disabled": true
+						},
+						{
+							"key": "ProductName",
+							"value": "raviolo",
 							"disabled": true
 						}
 					]
