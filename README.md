@@ -8,4 +8,3 @@ Unit Test
 
 check:
  list: product belongs to more one category
-voucher promo for category
