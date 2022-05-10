@@ -20,15 +20,52 @@ namespace MinimartApi.Controllers
          CRUD methods of Categories and Products.
         */
 
-        private BProduct product;
+        private BProduct products;
+        private BCategory categories;
 
         ProductController  ()
         {
-            product = new BProduct();
-        
+            products = new BProduct();
+            categories = new BCategory();
+        }
+
+        // ///////////
+        //Category
+        // ///////////
+
+        [HttpGet]
+        [Route("api/category/list")]
+        public IEnumerable<Category> GetCategories(int productId = 0, string productName = "", int categoryId = 0, string categoryName = "") //mco
+        {
+            return categories.list(categoryId, categoryName);
+        }
+
+        [HttpPost]
+        [Route("api/category")]
+        public int PostCategory([FromBody] Category newCategory)
+        {   //add a new category
+
+            int id = 0;
+            //insert into Minimart_Product Table
+            return id;
+        }
+
+        [HttpPut]
+        [Route("api/category")]
+        public void PutCategory([FromBody] Category aCategory)
+        {   //update a category 
+
         }
 
 
+        [HttpDelete]
+        [Route("api/category")]
+        public void DeleteCategory(int id)
+        { //delete a category
+
+        }
+
+        // /////////////
         //Type Product
         // ////////////
 
@@ -36,9 +73,8 @@ namespace MinimartApi.Controllers
         [Route("api/product/list")]
         public IEnumerable<Product> GetProducts( int productId = 0, string productName = "", int categoryId = 0, string categoryName ="") //mco
         {
-            return product.listar(productId, productName, categoryId, categoryName);
+            return products.list(categoryId, categoryName, productId, productName);
         }
-
 
         [HttpPost]
         [Route("api/product")]
@@ -56,7 +92,6 @@ namespace MinimartApi.Controllers
         {   //update a type of product 
 
         }
-
 
         [HttpDelete]
         [Route("api/product")]

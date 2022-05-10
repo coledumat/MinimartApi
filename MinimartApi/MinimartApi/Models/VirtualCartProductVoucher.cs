@@ -22,12 +22,14 @@ namespace MinimartApi.Models
 		public int StartingWhitXUnits { get; set; }
 		public int UnitOnDiscount { get; set; }
 		public int PercentageDiscount { get; set; }
-	    public int TipoVoucher { get; set; }
+	    //public int TipoVoucher { get; set; }
 		//
+		//Included Products
 		public int CategoryId { get; set; }
 		public string CategoryName { get; set; }
 		public int ProductId { get; set; } 
 		public string ProductName { get; set; }
-		public float Price { get; set; }
+		public float Price { get; set; } //informative 
+		//public List<Product>  Products { get; set; }
 	}
 }

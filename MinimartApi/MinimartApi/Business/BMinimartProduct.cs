@@ -25,7 +25,7 @@ namespace MinimartApi.Business
         }
 
 
-        public IEnumerable<MinimartProduct> listar(int minimartId, string minimartName, int productId, string productName, int categoryId, string categoryName, Boolean lowStock)
+        public IEnumerable<MinimartProduct> list(int minimartId, string minimartName, int productId, string productName, int categoryId, string categoryName, Boolean lowStock)
         {
             using (IDbConnection connection = new SqlConnection(CONNECTION_STRING))
             {

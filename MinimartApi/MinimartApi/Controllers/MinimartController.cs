@@ -18,17 +18,28 @@ namespace MinimartApi.Controllers
         */
 
 
-        private BMinimartProduct minimartProduct;
-        private BMinimart minimart;
+        private BMinimartProduct minimartProducts;
+        private BMinimart minimarts;
+        private BStoreTimeTable storeTimeTable;
 
         public MinimartController ()
         {
-            minimartProduct = new BMinimartProduct();
-            minimart = new BMinimart();
+            minimartProducts = new BMinimartProduct();
+            minimarts = new BMinimart();
+            storeTimeTable = new BStoreTimeTable();
         }
 
+        // ///////////
         // minimart
-        // ///////////7
+        // ///////////
+        [HttpGet]
+        [Route("api/minimart/list")]
+        public IEnumerable<Minimart> GetMinimarts(int minimartId = 0, string minimartName = "")
+        {   //list all minimarts 
+
+            return minimarts.list(minimartId, minimartName);
+        }
+
 
         [HttpPost]
         [Route("api/minimart")]
@@ -55,16 +66,53 @@ namespace MinimartApi.Controllers
 
         }
 
+        // ///////////////////////
+        //Minimart StoreTimeTable
+        // //////////////////////
 
+        [HttpGet]
+        [Route("api/storetimetable/list")]
+        public IEnumerable<StoreTimeTable> GetStoretimetable(int minimartId = 0, string minimartName = "", string workingDay = "")
+        {   //list all StroreTimeTable 
+
+            return storeTimeTable.list(minimartId, minimartName, workingDay);
+        }
+
+        [HttpPost]
+        [Route("api/storetimetable")]
+        public int PostStoreTimeTable([FromBody] StoreTimeTable newStoreTimeTable)
+        {   //add a new StoreTimeTable
+
+            int id = 0;
+            //insert into Minimart_Product Table
+            return id;
+        }
+
+        [HttpPut]
+        [Route("api/storetimetable")]
+        public void PutStoreTimeTable([FromBody] StoreTimeTable aStoreTimeTable)
+        {   //update a StoreTimeTable
+
+        }
+
+
+        [HttpDelete]
+        [Route("api/storetimetable")]
+        public void DeleteStoreTimeTable(int id)
+        { //delete a StoreTimeTable
+
+        }
+
+        // ///////////////7
         //Minimart Product
         // ////////////////
 
         [HttpGet]
         [Route("api/minimart/product/list")]
-        public IEnumerable<MinimartProduct> GetProducts(int minimartId = 0, string minimartName = "", int productId = 0, string productName = "", int categoryId = 0, string categoryName = "", Boolean lowStock = false) //mco
+        public IEnumerable<MinimartProduct> GetProducts(int minimartId = 0, string minimartName = "", int productId = 0, string productName = "", int categoryId = 0, string categoryName = "", Boolean lowStock = false) 
         {   //list all products available in the minimart (lowstock = false), or products with low stock (lowstock = true)
 
-            return minimartProduct.listar(minimartId, minimartName, productId, productName, categoryId, categoryName, lowStock);
+            return minimartProducts.list(minimartId, minimartName, productId, productName, categoryId, categoryName, lowStock);
         }
 
 

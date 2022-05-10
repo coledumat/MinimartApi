@@ -28,7 +28,7 @@ namespace MinimartApi.Controllers
         [Route("api/customer/list")]
         public IEnumerable<Customer> GetCustomers(int customerId = 0, string customerFullName = "", string email = "") 
         {
-            return customer.listar(customerId, customerFullName, email);
+            return customer.list(customerId, customerFullName, email);
         }
 
 

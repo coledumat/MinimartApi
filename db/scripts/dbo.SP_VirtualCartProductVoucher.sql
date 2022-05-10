@@ -11,10 +11,10 @@ CREATE   PROCEDURE [dbo].[SP_VirtualCartProductVoucher]
 	@voucher_id int = 0,
 	@voucher_num int = 0,
 	--@vocher_type int = 0,      --0 ProductVoucher / 1 CategoryVoucher
-	@product_id int = 0,              
-	@product_name nchar(200) = '',    
 	@category_id int = 0,             
-	@category_name nchar(200) = '' 
+	@category_name nchar(200) = '', 
+	@product_id int = 0,              
+	@product_name nchar(200) = ''    
 
 AS
 
@@ -23,7 +23,7 @@ begin
 	       LTrim(RTrim(m.Name)) as minimartName,
 		   --
 		   cu.Id as customerId, 
-	       LTrim(RTrim(cu.Name)) as customerName,
+	       LTrim(RTrim(cu.Name)) + ' ' + LTrim(RTrim(cu.LastName)) as customerFullName,
 		   --
 		   vp.Id as VoucherId,
 		   LTrim(RTrim(vp.Name)) as VoucherName,
@@ -59,6 +59,6 @@ begin
 	   --
 	   and ((p.Id = @product_id or @product_id = 0) and (Upper(LTrim(RTrim(p.Name))) Like '%' + Upper(LTrim(RTrim(@product_name))) + '%' or  @product_name = ''))
 	   and ((c.Id =@category_id or @category_id = 0) and (Upper(LTrim(RTrim(c.Name))) Like '%' + Upper(LTrim(RTrim(@category_name))) + '%' or  @category_name = ''))
-    ORDER BY c.Name, p.Name 
+    ORDER BY m.Id, cu.Id, vp.Id, c.Name, p.Name 
 
 end

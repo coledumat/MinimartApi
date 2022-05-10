@@ -11,10 +11,11 @@ CREATE   PROCEDURE [dbo].[SP_VirtualcartProduct]
 	@minimart_name nchar(200) = '',
 	@customer_id int = 0,
 	@customer_fullName nchar(200) = '',
-	@product_id int = 0,              
-	@product_name nchar(200) = '',    
 	@category_id int = 0,             
-	@category_name nchar(200) = ''    
+	@category_name nchar(200) = '',    
+	@product_id int = 0,              
+	@product_name nchar(200) = ''   
+
 AS
 
 begin 
@@ -22,7 +23,7 @@ begin
 	       LTrim(RTrim(m.Name)) as minimartName,
 		   --
 		   cu.Id as customerId, 
-	       LTrim(RTrim(cu.Name)) as customerName,
+	       LTrim(RTrim(cu.Name)) + ' ' + LTrim(RTrim(cu.LastName)) as customerFullName,
 		   --
 		   c.Id as categoryId,
 		   LTrim(RTrim(c.Name)) as categoryName,

@@ -16,8 +16,10 @@ namespace MinimartApi.Models
         public int ProductId { get; set; }
         public String ProductName { get; set; }
         public String ProductDescription { get; set; }
+        public float Price { get; set; }
+        //
         public int Stock { get; set; }
         public int MinimumStock { get; set; }
-        public float Price { get; set; }
+
     }
 }

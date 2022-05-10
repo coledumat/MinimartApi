@@ -4,10 +4,10 @@ filters: product id or name / category id or name
 */
 
 CREATE   PROCEDURE [dbo].[SP_Product]
-	@product_id int = 0,      --product id
-	@product_name nchar(200) = '', --product name
-	@category_id int = 0,       --category id
-	@category_name nchar(200) = ''     --category name
+	@category_id int = 0,      
+	@category_name nchar(200) = '',
+	@product_id int = 0,
+	@product_name nchar(200) = ''
 AS
 
 begin 

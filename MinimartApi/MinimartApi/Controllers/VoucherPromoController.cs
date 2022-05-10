@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using MinimartApi.Models;
+
 namespace MinimartApi.Controllers
 {
     public class VoucherPromoController : ApiController
@@ -13,7 +15,65 @@ namespace MinimartApi.Controllers
         CRUD methods of VoucherPromo (CategoryVoucherPromo and ProductVucherPromo).
        */
 
+        // ////////////////
+        //product Voucher Promo
+        // ////////////////
 
+
+        [HttpPost]
+        [Route("api/VoucherPromo/product")]
+        public int PostProductVoucherPromo([FromBody] ProductVoucherPromo newProductVoucherPromo)
+        {   //add a new type of ProductVoucherPromo 
+
+            int id = 0;
+            //insert into VoucherPromo and ProductVoucherPromo Tables
+            return id;
+        }
+
+        [HttpPut]
+        [Route("api/VoucherPromo/product")]
+        public void PutProductVoucherPromo([FromBody] ProductVoucherPromo aProductVoucherPromo)
+        {   //update a VoucherPromo of ProductVoucherPromo type
+
+        }
+
+        [HttpDelete]
+        [Route("api/VoucherPromo/product")]
+        public void DeleteProductVoucherPromo(int id)
+        { //delete a VoucherPromo of ProductVoucherPromo type
+
+        }
+
+        // ////////////////
+        //category Voucher Promo
+        // ////////////////
+
+
+        [HttpPost]
+        [Route("api/VoucherPromo/category")]
+        public int PostCategoryVoucherPromo([FromBody] CategoryVoucherPromo newCategoryVoucherPromo)
+        {   //add a new type of CategoryVoucherPromo 
+
+            int id = 0;
+            //insert into VoucherPromo, CategoryVoucherPromo and CategoryVoucherPromo_ExcProduct Tables
+            return id;
+        }
+
+        [HttpPut]
+        [Route("api/VoucherPromo/category")]
+        public void PutCategoryVoucherPromo([FromBody] CategoryVoucherPromo aCategoryVoucherPromo)
+        {   //update a VoucherPromo of categoryVoucherPromo type
+
+        }
+
+        [HttpDelete]
+        [Route("api/VoucherPromo/category")]
+        public void DeleteCategoryVoucherPromo(int id)
+        { //delete a VoucherPromo of categoryVoucherPromo type
+
+        }
+
+        /*
         // GET: api/Voucher
         public IEnumerable<string> Get()
         {
@@ -40,5 +100,6 @@ namespace MinimartApi.Controllers
         public void Delete(int id)
         {
         }
+        */
     }
 }

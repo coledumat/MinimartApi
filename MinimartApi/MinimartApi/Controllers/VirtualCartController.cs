@@ -14,19 +14,21 @@ namespace MinimartApi.Controllers
     {
         /*
         CRUD methods of Virtual Cart, 
-        add/remove products discount minimart stock, 
-        add/remove Voutchers discount for Categorie or Products and calculate discounts
+        add/remove products to a virtualCart and update stock from minimart, 
+        add/remove Voutchers discount (for Category or Products) to a virtualCart 
+        and calculate discounts
        */
 
-        private BVirtualCartProduct product;
-        private BVirtualCartProductVoucher productVoucher;
+        private BVirtualCartProduct vcproduct;
+        private BVirtualCartProductVoucher vcproductVoucher;
 
         VirtualCartController()
         {
-            product = new BVirtualCartProduct();
-            productVoucher = new BVirtualCartProductVoucher();
+            vcproduct = new BVirtualCartProduct();
+            vcproductVoucher = new BVirtualCartProductVoucher();
         }
 
+        // //////////////////////////
         //virtualcart product
         // ////////////////////////77
 
@@ -35,17 +37,43 @@ namespace MinimartApi.Controllers
         public IEnumerable<VirtualCartProduct> GetProducts(int miniMartId = 0, string minimartName = "",
                                                            int customerId = 0, string customerFullName = "", 
                                                            int productId = 0, string productName = "", int categoryId = 0, string categoryName = "") 
-        { //return products in the virtualchart
-            return product.listar(miniMartId, minimartName, customerId, customerFullName, productId, productName, categoryId, categoryName);
+        { //return products in the virtualchart and subtotal by product
+            return vcproduct.list(miniMartId, minimartName, customerId, customerFullName, productId, productName, categoryId, categoryName);
         }
 
         [HttpGet]
-        [Route("api/virtualcart/product/totalize")]
-        public IEnumerable<VirtualCartProduct> GetTotals(int miniMartId = 0,  int customerId = 0)
-        { //return total an total with discounts
+        [Route("api/virtualcart/product/listWDiscount")]
+        public IEnumerable<VirtualCartProductWDiscount> GetProductDiscount(int miniMartId = 0, string minimartName = "",
+                                                          int customerId = 0, string customerFullName = "",
+                                                          int productId = 0, string productName = "", int categoryId = 0, string categoryName = "",
+                                                          int voucherId = 0, int voucherNum = 0
+                                                          )
+        { //return subtotal by product an subtotal by product with discount
 
-            //TODO Create structure with totals
-            return product.totalize(miniMartId, customerId); //,productVoucher);
+            //search list of VirtualCartProduct
+            IEnumerable<VirtualCartProductWDiscount> virtualCartProductWDiscount = vcproduct.listWDiscount(miniMartId, minimartName, customerId, customerFullName, productId, productName, categoryId, categoryName, voucherId, voucherNum);
+
+            //serch list of VirtualCartProductVouchers
+            IEnumerable<VirtualCartProductVoucher> virtualCartProductVoucher = vcproductVoucher.list(miniMartId, minimartName, customerId, customerFullName, voucherId, voucherNum, productId, productName, categoryId, categoryName);
+
+            //for each VirtualCartProduct calculate the discount //cumulative discounts
+            foreach ( var productWDiscount in virtualCartProductWDiscount )
+            {
+                //filter if there is the product in some Voucher
+                var virtualCartProductVoucher_aux =  from a in virtualCartProductVoucher
+                                                     where a.ProductId == productWDiscount.ProductId 
+                                                     select a;
+                float discount = 0;
+                foreach (var productVoucher in virtualCartProductVoucher_aux)
+                {//for each voucher apply its discount
+                    if (productVoucher.StartingWhitXUnits <= productWDiscount.Units)
+                    {
+                        discount += ((productWDiscount.Price * productVoucher.PercentageDiscount / 100) * (productWDiscount.Units / productVoucher.StartingWhitXUnits));
+                    }
+                }
+                productWDiscount.SubtotalWithDiscount = productWDiscount.SubtotalProduct - discount;
+            }
+            return virtualCartProductWDiscount;
         }
 
         [HttpPost]
@@ -72,6 +100,7 @@ namespace MinimartApi.Controllers
 
         }
 
+        // /////////////////////////
         //virtualcart productVoucher
         // /////////////////////////
 
@@ -81,9 +110,9 @@ namespace MinimartApi.Controllers
         public IEnumerable<VirtualCartProductVoucher> GetProducts(int miniMartId = 0, string minimartName = "",
                                                                   int customerId = 0, string customerFullName = "",
                                                                   int voucherId = 0, int voucherNum = 0,
-                                                                  int productId = 0, string productName = "", int categoryId = 0, string categoryName = "")
+                                                                  int categoryId = 0, string categoryName = "", int productId = 0, string productName = "")
         { //return products in a vituarcartProductVoucher
-            return productVoucher.listar(miniMartId, minimartName, customerId, customerFullName, voucherId, voucherNum, productId, productName, categoryId, categoryName);
+            return vcproductVoucher.list(miniMartId, minimartName, customerId, customerFullName, voucherId, voucherNum, categoryId, categoryName, productId, productName);
         }
 
 
