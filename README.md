@@ -1,10 +1,18 @@
+##############
 # MinimartApi
+##############
 
-TODO:
-Initial Load
-setup all data from a get
-Provide an API Swagger documentation (only Postman examples for now)
-Unit Test
+-modelo diagrama der
+-carga inicial en la base de datos
 
-check:
- list: product belongs to more one category
+-implementado:
+consulta/listado de productos 
+consulta/listado de stock en minimarts y consulta de bajo stock
+crear modificar eliminar consulta/listado modelo de productVoucherPromo
+agregar y quitar consulta/listado producto en virtual cart 
+agregar y quitar productVoucher en virtual cart
+calcular descuentos de producto
+
+
+-postman ejemplos
+

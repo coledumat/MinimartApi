@@ -7,41 +7,61 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MinimartApi.Models
 {
+	/// <summary>
+	/// Generic Voucher
+	/// </summary>
 	public abstract class VoucherPromoModel
 	{
-
+	
 		[Required( ErrorMessage="MinimartId Required")]
 		public int MinimartId { get; set; }
-		[Required(ErrorMessage = "MinimartId Required")]
+	
+		[Required(ErrorMessage = "VIniNumber Required")]
 		public int VIniNumber { get; set; }
-		[Required(ErrorMessage = "MinimartId Required")]
+		
+		[Required(ErrorMessage = "VEndNumber Required")]
 		public int VEndNumber { get; set; }
-		[Required(ErrorMessage = "MinimartId Required")]
+		
+		[Required(ErrorMessage = "Name Required")]
 		public string Name { get; set; }
+		
 		public String Description { get; set; }
-		[Required(ErrorMessage = "MinimartId Required")]
+		
+		[Required(ErrorMessage = "StartDate Required")]
 		public DateTime StartDate { get; set; }
-		[Required(ErrorMessage = "MinimartId Required")]
+		
+		[Required(ErrorMessage = "EndDate Required")]
 		public DateTime EndDate { get; set; }
+		
 		public List<DayOfWeek> WeekDays { get; set; }
-		[Required(ErrorMessage = "MinimartId Required")]
+		
+		[Required(ErrorMessage = "StartingWithXUnits Required")]
 		public int StartingWithXUnits { get; set; }
-		[Required(ErrorMessage = "MinimartId Required")]
+		
+		[Required(ErrorMessage = "UnitOnDiscount Required")]
 		public int UnitOnDiscount { get; set; }
-		[Required(ErrorMessage = "MinimartId Required")]
+		
+		[Required(ErrorMessage = "PercentageDiscount Required")]
 		public int PercentageDiscount { get; set; }
 	}
 
+	/// <summary>
+	/// Product Voucher
+	/// </summary>
 	public class ProductVoucherPromoModel : VoucherPromoModel
 	{
-		[Required(ErrorMessage = "MinimartId Required")]
+		[Required(ErrorMessage = "includeProducts Required")]
 		public List<ProductModel> includeProducts;
 	}
 
+	/// <summary>
+	/// Category Voucher
+	/// </summary>
 	public class CategoryVoucherPromoModel : VoucherPromoModel
 	{
-		[Required(ErrorMessage = "MinimartId Required")]
+		[Required(ErrorMessage = "id_Category Required")]
 		public int id_Category;
+
 		public List<ProductModel> excludeProducts;
 	}
 
@@ -65,15 +85,16 @@ namespace MinimartApi.Models
 		//public int TipoVoucher { get; set; }
 		}
 		
-	public class ProductVoucherPromo: VoucherPromo
-	{ 
+	public class ProductVoucherPromo: VoucherPromo  
+	{
 		//Included Products
-		//public List<Product>  Products { get; set; }
+		//public List<Product>  includedProducts { get; set; }  [
 		public int CategoryId { get; set; }
 		public string CategoryName { get; set; }
 		public int ProductId { get; set; } 
 		public string ProductName { get; set; }
 		public float Price { get; set; }
+		//]
 		
 	}
 
@@ -81,11 +102,14 @@ namespace MinimartApi.Models
 	{
 		public int CategoryId { get; set; }
 		public string CategoryName { get; set; }
+
 		//Excluded Products
-		//public List<Product>  Products { get; set; }
+		//TODO: Convert in a field 
+		//public List<Product> excludedProducts { get; set; } [
 		public int ProductId { get; set; }
 		public string ProductName { get; set; }
 		public float Price { get; set; }
+		//]
 	}
 
 }

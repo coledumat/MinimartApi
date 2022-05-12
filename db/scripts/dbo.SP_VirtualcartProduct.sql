@@ -1,12 +1,11 @@
 ﻿/*
-return all products in stock 
+return all products in a Virtual Cart
 order by category name and product name
-filters: minimart sucursal id or name / product id or name / category id or name/
-         lowStock 0 return available stock - lowStock 1 retrun stock under minimum amount
-
+filters: minimart sucursal id or name / customer id or name / product id or name / category id or name/
+     
 */
 
-CREATE   PROCEDURE [dbo].[SP_VirtualcartProduct]
+CREATE   PROCEDURE [dbo].[SP_VirtualCartProduct]
     @minimart_id int = 0,
 	@minimart_name nchar(200) = '',
 	@customer_id int = 0,

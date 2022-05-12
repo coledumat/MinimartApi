@@ -19,7 +19,7 @@ namespace MinimartApi.Tests.Controllers
 
             // Declarar
             Assert.IsNotNull(result);
-            Assert.AreEqual("Home Page", result.ViewBag.Title);
+            Assert.AreEqual("Minimart Home Page", result.ViewBag.Title);
         }
     }
 }

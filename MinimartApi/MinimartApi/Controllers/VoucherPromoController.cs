@@ -11,12 +11,13 @@ using MinimartApi.Business;
 
 namespace MinimartApi.Controllers
 {
+    /// <summary>
+    ///  promotional voucher management
+    ///  VoucherPromo and its specializations: CategoryVucherPromo and ProductVucherPromo
+    /// </summary>
     public class VoucherPromoController : ApiController
     {
-        /*
-        CRUD methods of VoucherPromo (CategoryVoucherPromo and ProductVucherPromo).
-       */
-
+        //Business Classes reference
         private BVoucherPromo vouchersPromos;
 
         VoucherPromoController()
@@ -24,29 +25,42 @@ namespace MinimartApi.Controllers
             vouchersPromos = new BVoucherPromo();
         }
 
+        // /////////////////////
+        // Product Voucher Promo
+        // /////////////////////
 
-
-        // ////////////////
-        //product Voucher Promo
-        // ////////////////
-
+        /// <summary>
+        /// List the products included in the Vouchers of a minimart
+        /// </summary>
+        /// <param name="miniMartId">0 for all</param>
+        /// <param name="minimartName">full o partial name</param>
+        /// <param name="voucherId">id of type of product voucher. 0 for all</param>
+        /// <param name="categoryId">0 for all</param>
+        /// <param name="categoryName">full o partial name</param>
+        /// <param name="productId">0 for all</param>
+        /// <param name="productName">full o partial name</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/VoucherPromo/product/list")]
         public IEnumerable<ProductVoucherPromo> GetProductVouchers(int miniMartId = 0, string minimartName = "",
-                                                                         int voucherId = 0, 
-                                                                         int categoryId = 0, string categoryName = "", int productId = 0, string productName = "")
-        { //return products in a vituarcartProductVoucher
+                                                                   int voucherId = 0, 
+                                                                   int categoryId = 0, string categoryName = "", int productId = 0, string productName = "")
+        { 
             return vouchersPromos.listProductVoucherPromos(miniMartId, minimartName, voucherId, categoryId, categoryName, productId, productName);
         }
 
-
+        /// <summary>
+        /// Create a new type of ProductVoucherPromo 
+        /// </summary>
+        /// <param name="newProductVoucherPromo"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/VoucherPromo/product")]
         public IHttpActionResult PostProductVoucherPromo([FromBody] ProductVoucherPromoModel newProductVoucherPromo)
-        {   //add a new type of ProductVoucherPromo 
-            
+        {   
+            //chek parameters
             if ( newProductVoucherPromo == null ) {
-                return BadRequest("Inicializar parametros");
+                return BadRequest("Initialize parameters");
             }
 
             if (! ModelState.IsValid) {
@@ -61,18 +75,54 @@ namespace MinimartApi.Controllers
                 return InternalServerError(); 
         }
 
+        /// <summary>
+        /// update a VoucherPromo of ProductVoucherPromo type
+        /// </summary>
+        /// <param name="aProductVoucherPromo"></param>
         [HttpPut]
-        [Route("api/VoucherPromo/product")]
-        public void PutProductVoucherPromo([FromBody] ProductVoucherPromo aProductVoucherPromo)
-        {   //update a VoucherPromo of ProductVoucherPromo type
+        [Route("api/VoucherPromo/product/{int id}")]
+        public IHttpActionResult PutProductVoucherPromo(int id, [FromBody] ProductVoucherPromoModel aProductVoucherPromo)
+        {
+            //chek parameters
+            if (aProductVoucherPromo == null)
+            {
+                return BadRequest("Initialize parameters");
+            }
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+
+            int result = vouchersPromos.UpdateProductVoucherPromo(id, aProductVoucherPromo);
+
+            if (result == 1)
+                return Ok();
+            else
+                return InternalServerError();
         }
 
+        /// <summary>
+        /// delete a VoucherPromo of ProductVoucherPromo type
+        /// </summary>
+        /// <param name="id_Minimart"></param>
+        /// <param name="id"></param>
         [HttpDelete]
-        [Route("api/VoucherPromo/product")]
-        public void DeleteProductVoucherPromo(int id)
-        { //delete a VoucherPromo of ProductVoucherPromo type
+        [Route("api/VoucherPromo/product/{id int}")]
+        public IHttpActionResult DeleteProductVoucherPromo( int id)
+        {
+            //chek parameters
+            if (id == 0)
+            {
+                return BadRequest("Initialize parameters");
+            }
 
+            int result = vouchersPromos.DeleteProductVoucherPromo(id);
+
+            if (result == 1)
+                return Ok();
+            else
+                return InternalServerError();
         }
 
         // ////////////////

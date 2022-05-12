@@ -1,8 +1,5 @@
 ﻿/*
-return all products in stock 
-order by category name and product name
-filters: minimart sucursal id or name / product id or name / category id or name/
-         lowStock 0 return available stock - lowStock 1 retrun stock under minimum amount
+borrar no se usa
 
 */
 

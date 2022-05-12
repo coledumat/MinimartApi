@@ -109,10 +109,10 @@ namespace MinimartApi.Controllers
 
         [HttpGet]
         [Route("api/minimart/product/list")]
-        public IEnumerable<MinimartProduct> GetProducts(int minimartId = 0, string minimartName = "", int productId = 0, string productName = "", int categoryId = 0, string categoryName = "", Boolean lowStock = false) 
+        public IEnumerable<MinimartProduct> GetProducts(int minimartId = 0, string minimartName = "", int categoryId = 0, string categoryName = "", int productId = 0, string productName = "", Boolean lowStock = false) 
         {   //list all products available in the minimart (lowstock = false), or products with low stock (lowstock = true)
 
-            return minimartProducts.list(minimartId, minimartName, productId, productName, categoryId, categoryName, lowStock);
+            return minimartProducts.list(minimartId, minimartName, categoryId, categoryName, productId, productName, lowStock);
         }
 
 

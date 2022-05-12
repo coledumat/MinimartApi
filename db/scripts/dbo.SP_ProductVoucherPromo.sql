@@ -1,6 +1,6 @@
 ﻿/*
-return all VirtualCart_Vouvher  (CategoryVoucherPromo and ProductVucherPromo)
-filters: product id or name / category id or name
+return all ProductVouvherPromo  
+filters: minimart id or name / voucher id / product id or name / category id or name
 */
 
 CREATE   PROCEDURE [dbo].[SP_ProductVoucherPromo]

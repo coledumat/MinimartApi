@@ -32,11 +32,12 @@ begin
 		   --
 		   mp.Stock ,
 		   mp.MinimumStock 
-	  FROM Minimart_Product mp
-	  join Minimart m on (m.Id = mp.Id_Minimart) 
-	  join Product p on (p.Id = mp.Id_product)
+	  FROM 
+	       Product p 
 	  join Product_Category pc on (p.Id = pc.Id_Product )
       join Category AS c on ( c.Id = pc.id_Category)
+	  left join Minimart_Product mp on (mp.Id_product = p.Id )
+	  left join Minimart m on (m.Id = mp.Id_Minimart) 
      WHERE ((m.Id = @minimart_id or @minimart_id = 0) and (Upper(LTrim(RTrim(m.Name))) Like  '%' + Upper(LTrim(RTrim(@minimart_name))) + '%' or  @minimart_name = ''))
 	   and ((p.Id = @product_id or @product_id = 0) and (Upper(LTrim(RTrim(p.Name))) Like '%' + Upper(LTrim(RTrim(@product_name))) + '%' or  @product_name = ''))
 	   and ((c.Id =@category_id or @category_id = 0) and (Upper(LTrim(RTrim(c.Name))) Like '%' + Upper(LTrim(RTrim(@category_name))) + '%' or  @category_name = ''))

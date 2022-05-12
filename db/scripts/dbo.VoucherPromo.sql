@@ -12,6 +12,6 @@
     [UnitOnDiscount]     INT         NOT NULL,
     [PercentageDiscount] INT         NOT NULL,
     [TipoVoucher]        INT         DEFAULT ((1)) NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC, [Id_Minimart] ASC)
+    CONSTRAINT [PK_VoucherPromo] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Products",
+			"name": "Products (todos los tipos de categoria,producto)",
 			"protocolProfileBehavior": {
 				"strictSSL": false
 			},
@@ -54,7 +54,65 @@
 			"response": []
 		},
 		{
-			"name": "Minimart Poduct Voucher Promo",
+			"name": "Minimart Poducts (todol los productos con stock en algun minimart / productos con bajo stock)",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44386/api/minimart/product/list?MinimartId=1&MinimartName=downtown&CategoryId=1&CategoryName=soda&ProductId=3&ProductName=raviolo&LowStock=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"minimart",
+						"product",
+						"list"
+					],
+					"query": [
+						{
+							"key": "MinimartId",
+							"value": "1"
+						},
+						{
+							"key": "MinimartName",
+							"value": "downtown"
+						},
+						{
+							"key": "CategoryId",
+							"value": "1"
+						},
+						{
+							"key": "CategoryName",
+							"value": "soda"
+						},
+						{
+							"key": "ProductId",
+							"value": "3"
+						},
+						{
+							"key": "ProductName",
+							"value": "raviolo"
+						},
+						{
+							"key": "LowStock",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Minimart Poduct Voucher Promos (todos los tipos de voucher de productos)",
 			"protocolProfileBehavior": {
 				"strictSSL": false
 			},
@@ -119,7 +177,7 @@
 			"response": []
 		},
 		{
-			"name": "Minimart Poduct Voucher Promo  Crear",
+			"name": "Minimart Poduct Voucher Promo  Crear (crea un tipo de boucher de producto)",
 			"protocolProfileBehavior": {
 				"strictSSL": false
 			},
@@ -155,7 +213,7 @@
 			"response": []
 		},
 		{
-			"name": "VirtualCart Products",
+			"name": "VirtualCart Products (todos los productos en algun virtual cart)",
 			"protocolProfileBehavior": {
 				"strictSSL": false
 			},
@@ -223,7 +281,7 @@
 			"response": []
 		},
 		{
-			"name": "VirtualCart Product Vouchers",
+			"name": "VirtualCart Product Vouchers (todos los tipos de voucher asociados a algun virtualCart)",
 			"protocolProfileBehavior": {
 				"strictSSL": false
 			},
@@ -301,7 +359,7 @@
 			"response": []
 		},
 		{
-			"name": "VirtualCart Products Discount",
+			"name": "VirtualCart Products Discount (calcula los decuentos de los voucers de producto en algun minicart)",
 			"protocolProfileBehavior": {
 				"strictSSL": false
 			},

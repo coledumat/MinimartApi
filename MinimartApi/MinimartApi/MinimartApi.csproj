@@ -164,7 +164,7 @@
     <Compile Include="Business\BCustomer.cs" />
     <Compile Include="Business\BCategory.cs" />
     <Compile Include="Business\BVoucherPromo.cs" />
-    <Compile Include="Business\BVirtualCartProductVoucher.cs" />
+    <Compile Include="Business\BVirtualCartVoucherPromo.cs" />
     <Compile Include="Business\BVirtualCartProduct.cs" />
     <Compile Include="Business\BProduct.cs" />
     <Compile Include="Business\BusinessClass.cs" />
@@ -184,7 +184,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\VirtualCartCategoryVoucher.cs" />
     <Compile Include="Models\VoucherPromo.cs" />
-    <Compile Include="Models\VirtualCartProductVoucher.cs" />
+    <Compile Include="Models\VirtualCartVoucherPromo.cs" />
     <Compile Include="Models\VirtualCartProduct .cs" />
     <Compile Include="Models\MinimartProduct .cs" />
     <Compile Include="Models\Product.cs" />
