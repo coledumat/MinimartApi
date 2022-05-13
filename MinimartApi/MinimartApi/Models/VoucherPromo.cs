@@ -51,7 +51,7 @@ namespace MinimartApi.Models
 	public class ProductVoucherPromoModel : VoucherPromoModel
 	{
 		[Required(ErrorMessage = "includeProducts Required")]
-		public List<ProductModel> includeProducts;
+		public List<ProductVoucherModel> includeProducts;
 	}
 
 	/// <summary>
@@ -60,9 +60,9 @@ namespace MinimartApi.Models
 	public class CategoryVoucherPromoModel : VoucherPromoModel
 	{
 		[Required(ErrorMessage = "id_Category Required")]
-		public int id_Category;
+		public int CategoryId;
 
-		public List<ProductModel> excludeProducts;
+		public List<ProductVoucherModel> excludeProducts;
 	}
 
 
@@ -112,4 +112,15 @@ namespace MinimartApi.Models
 		//]
 	}
 
+
+
+	public class CategoryVoucherPromo_ExcProduct
+	{
+		public int VoucherId { get; set; }
+		public string VoucherName { get; set; }
+		public int CategoryId { get; set; }
+		public string CategoryName { get; set; }
+		public int ExcludeProductId { get; set; }
+		public string ExcludeProductName { get; set; }
+	}
 }

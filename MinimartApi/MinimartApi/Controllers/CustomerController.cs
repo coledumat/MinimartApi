@@ -10,12 +10,12 @@ using MinimartApi.Models;
 
 namespace MinimartApi.Controllers
 {
+    /// <summary>
+    ///    CRUD methods of Customers.
+    /// </summary>
     public class CustomerController : ApiController
     {
-        /*
-           CRUD methods of Customers.
-       */
-
+        
         private BCustomer customer;
 
         CustomerController()
@@ -34,7 +34,7 @@ namespace MinimartApi.Controllers
 
         [HttpPost]
         [Route("api/customer")]
-        public int PostCustomer([FromBody] Customer newCostumer)
+        public int PostCustomer([FromBody] CustomerModel newCostumer)
         {   //add a new customer 
 
             int id = 0;
@@ -43,8 +43,8 @@ namespace MinimartApi.Controllers
         }
 
         [HttpPut]
-        [Route("api/customer")]
-        public void PutProduct([FromBody] Customer aCustomer)
+        [Route("api/customer/{Int Id}")]
+        public void PutProduct(int Id, [FromBody] CustomerModel aCustomer)
         {   //update a customer 
 
         }

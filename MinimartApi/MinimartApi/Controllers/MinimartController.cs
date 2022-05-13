@@ -52,8 +52,8 @@ namespace MinimartApi.Controllers
         }
 
         [HttpPut]
-        [Route("api/minimart")]
-        public void PutMinimart([FromBody] Minimart aMinimart)
+        [Route("api/minimart/{int Id}")]
+        public void PutMinimart(int Id,[FromBody] Minimart aMinimart)
         {   //update a minimart
 
         }
@@ -80,7 +80,7 @@ namespace MinimartApi.Controllers
 
         [HttpPost]
         [Route("api/storetimetable")]
-        public int PostStoreTimeTable([FromBody] StoreTimeTable newStoreTimeTable)
+        public int PostStoreTimeTable([FromBody] StoreTimeTableModel newStoreTimeTable)
         {   //add a new StoreTimeTable
 
             int id = 0;
@@ -89,15 +89,15 @@ namespace MinimartApi.Controllers
         }
 
         [HttpPut]
-        [Route("api/storetimetable")]
-        public void PutStoreTimeTable([FromBody] StoreTimeTable aStoreTimeTable)
+        [Route("api/storetimetable/{int Id}")]
+        public void PutStoreTimeTable(int Id, [FromBody] StoreTimeTableModel aStoreTimeTable)
         {   //update a StoreTimeTable
 
         }
 
 
         [HttpDelete]
-        [Route("api/storetimetable")]
+        [Route("api/storetimetable/{int Id}")]
         public void DeleteStoreTimeTable(int id)
         { //delete a StoreTimeTable
 
@@ -115,20 +115,65 @@ namespace MinimartApi.Controllers
             return minimartProducts.list(minimartId, minimartName, categoryId, categoryName, productId, productName, lowStock);
         }
 
+        /// <summary>
+        /// add a list of new product and its stock in a minimart
+        /// </summary>
+        /// <param name="newMinimartProducts"></param>
+        /// <returns></returns>
+        [HttpPost ]
+        [Route("api/minimart/products")]
+        public IHttpActionResult PostProducts([FromBody] List<MinimartProductModel> newMinimartProducts)
+        {
+            //chek parameters
+            if (newMinimartProducts == null)
+            {
+                return BadRequest("Initialize parameters");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
 
+            int result;
+            foreach (var product in newMinimartProducts)
+            { 
+                result = minimartProducts.CreateMinimartProduct(product);
+                if (result != 1)
+                    return InternalServerError();
+            }
+            return Ok();
+        }
+
+        /// <summary>
+        /// add a new product and its stock in a minimart
+        /// </summary>
+        /// <param name="newMinimartProduct"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/minimart/product")]
-        public int PostProduct([FromBody] MinimartProduct newMinimartProduct)
-        {   //add a new product and its stock in a minimart
+        public IHttpActionResult PostProduct([FromBody] MinimartProductModel newMinimartProduct)
+        {
+            //chek parameters
+            if (newMinimartProduct == null)
+            {
+                return BadRequest("Initialize parameters");
+            }
 
-            int id = 0;
-            //insert into Minimart_Product Table
-            return id;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+
+            int result = minimartProducts.CreateMinimartProduct(newMinimartProduct);
+            if (result == 1)
+                return Ok();
+            else
+                return InternalServerError();
         }
 
         [HttpPut]
         [Route("api/minimart/product")]
-        public void PutProduct([FromBody] MinimartProduct aMinimartProduct)
+        public void PutProduct([FromBody] MinimartProductModel aMinimartProduct)
         {   //update a product and its stock in a minimart
 
         }
@@ -136,7 +181,7 @@ namespace MinimartApi.Controllers
 
         [HttpDelete]
         [Route("api/minimart/product")]
-        public void DeleteProduct(int id)
+        public void DeleteProduct(int MinimartId, int ProductId)
         { //delete a product and its stock from a minimart
 
         }

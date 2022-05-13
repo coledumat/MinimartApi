@@ -5,9 +5,13 @@ using System.Web;
 
 namespace MinimartApi.Models
 {
+    public class CategoryModel
+    {
+        public String CategoryName { get; set; }
+    }
+
     public class Category
     {
         public int CategoryId { get; set; }
-        public String CategoryName { get; set; }
     }
 }

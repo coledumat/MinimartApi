@@ -7,6 +7,10 @@ using System.Web.Http;
 
 namespace MinimartApi.Controllers
 {
+
+    /// <summary>
+    /// example controller for test
+    /// </summary>
     public class ValuesController : ApiController
     {
         // GET api/values

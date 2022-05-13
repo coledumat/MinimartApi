@@ -6,11 +6,11 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 
 namespace MinimartApi.Models
-{
-    public class Customer
-    {
-        public int Id { get; set; }
 
+{
+    
+    public class CustomerModel
+    {
         [Required(ErrorMessage = "You must enter an Name")]
         [StringLength(50, ErrorMessage = "Maximum Name length: 200 characters")]
         public String Name { get; set; }
@@ -29,4 +29,13 @@ namespace MinimartApi.Models
 
         //TODO: add all properties 
     }
+
+    public class Customer :CustomerModel
+    {
+        public int Id { get; set; }
+
+
+    }
+
+
 }

@@ -17,7 +17,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44386/api/product/list?CategoryId=1",
+					"raw": "https://localhost:44386/api/product/list",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -31,7 +31,8 @@
 					"query": [
 						{
 							"key": "CategoryId",
-							"value": "1"
+							"value": "1",
+							"disabled": true
 						},
 						{
 							"key": "CategoryName",
@@ -65,7 +66,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44386/api/minimart/product/list?MinimartId=1&MinimartName=downtown&CategoryId=1&CategoryName=soda&ProductId=3&ProductName=raviolo&LowStock=1",
+					"raw": "https://localhost:44386/api/minimart/product/list?CategoryName=soda",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -80,15 +81,18 @@
 					"query": [
 						{
 							"key": "MinimartId",
-							"value": "1"
+							"value": "1",
+							"disabled": true
 						},
 						{
 							"key": "MinimartName",
-							"value": "downtown"
+							"value": "downtown",
+							"disabled": true
 						},
 						{
 							"key": "CategoryId",
-							"value": "1"
+							"value": "1",
+							"disabled": true
 						},
 						{
 							"key": "CategoryName",
@@ -96,20 +100,175 @@
 						},
 						{
 							"key": "ProductId",
-							"value": "3"
+							"value": "3",
+							"disabled": true
 						},
 						{
 							"key": "ProductName",
-							"value": "raviolo"
+							"value": "raviolo",
+							"disabled": true
 						},
 						{
 							"key": "LowStock",
-							"value": "1"
+							"value": "1",
+							"disabled": true
 						}
 					]
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Minimart Poduct Agregar (Agrega stock de un producto a un minimart)",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"MinimartId\": 1,\r\n        \"ProductId\": 2,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44386/api/minimart/product/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"minimart",
+						"product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Minimart Poducts Agregar (Agrega stock de una lista de producto a un minimart)",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"MinimartId\": 3,\r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 2,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Coffee flavoured milk\",\r\n        \"Price\": 45.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"MinimartId\": 3,        \r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 1,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Cold Ice Tea\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 10.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"MinimartId\": 3,        \r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 6,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Diet Slurm\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 6665.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"MinimartId\": 3,        \r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 3,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Nuke-Cola\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 10.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"MinimartId\": 3,        \r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 5,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Slurm\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 10.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"MinimartId\": 3,        \r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 4,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Sprute\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 11.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    }\r\n]\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44386/api/minimart/productS/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"minimart",
+						"productS",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "EJEMPLO Minimart Poducts Agregar (Agrega stock de una lista de producto a un minimart)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"NO_CategoryName\": \"Bathroom\",\r\n        \"ProductId\": 24,\r\n        \"CategoryId\": 4,\r\n        \"NO_ProductName\": \"Cabbagegate toothpaste\",\r\n        \"NO_ProductDescription\": null,\r\n        \"NO_Price\": 43.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Bathroom\",\r\n        \"ProductId\": 22,\r\n        \"CategoryId\": 4,\r\n        \"ProductName\": \"Generic soap\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 77.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Bathroom\",\r\n        \"ProductId\": 23,\r\n        \"CategoryId\": 4,\r\n        \"ProductName\": \"PANTONE shampoo\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 123.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Bathroom\",\r\n        \"ProductId\": 21,\r\n        \"CategoryId\": 4,\r\n        \"ProductName\": \"Pure steel toilet paper\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 33.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Cleaning\",\r\n        \"ProductId\": 16,\r\n        \"CategoryId\": 3,\r\n        \"ProductName\": \"Atlantis detergent\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 55.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Cleaning\",\r\n        \"ProductId\": 20,\r\n        \"CategoryId\": 3,\r\n        \"ProductName\": \"Generic mop\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 34.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Cleaning\",\r\n        \"ProductId\": 19,\r\n        \"CategoryId\": 3,\r\n        \"ProductName\": \"Sponge, Bob\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 5.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Cleaning\",\r\n        \"ProductId\": 17,\r\n        \"CategoryId\": 3,\r\n        \"ProductName\": \"Virulanita\\r\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 20.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Food\",\r\n        \"ProductId\": 9,\r\n        \"CategoryId\": 2,\r\n        \"ProductName\": \"Garlic-o-bread 2000\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 44.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Food\",\r\n        \"ProductId\": 10,\r\n        \"CategoryId\": 2,\r\n        \"ProductName\": \"LACTEL bread\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 23.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Food\",\r\n        \"ProductId\": 13,\r\n        \"CategoryId\": 2,\r\n        \"ProductName\": \"Milanga ganga\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 56.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Food\",\r\n        \"ProductId\": 14,\r\n        \"CategoryId\": 2,\r\n        \"ProductName\": \"Milanga ganga napo\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 56.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Food\",\r\n        \"ProductId\": 11,\r\n        \"CategoryId\": 2,\r\n        \"ProductName\": \"Ravioloches x12\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 565.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Food\",\r\n        \"ProductId\": 12,\r\n        \"CategoryId\": 2,\r\n        \"ProductName\": \"Ravioloches x48\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 10.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Food\",\r\n        \"ProductId\": 7,\r\n        \"CategoryId\": 2,\r\n        \"ProductName\": \"Salsa Cookies\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 11.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Food\",\r\n        \"ProductId\": 8,\r\n        \"CategoryId\": 2,\r\n        \"ProductName\": \"Windmill Cookies\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 10.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 2,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Coffee flavoured milk\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 45.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 1,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Cold Ice Tea\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 10.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 6,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Diet Slurm\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 6665.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 3,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Nuke-Cola\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 10.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 5,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Slurm\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 10.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    },\r\n    {\r\n        \"CategoryName\": \"Soda\",\r\n        \"ProductId\": 4,\r\n        \"CategoryId\": 1,\r\n        \"ProductName\": \"Sprute\",\r\n        \"ProductDescription\": null,\r\n        \"Price\": 11.0,\r\n        \"Stock\": 4,\r\n        \"MinimumStock\": 5\r\n    }\r\n]\r\n\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44386/api/minimart/product/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44386",
+							"path": [
+								"api",
+								"minimart",
+								"product",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Expires",
+							"value": "-1"
+						},
+						{
+							"key": "Server",
+							"value": "Microsoft-IIS/10.0"
+						},
+						{
+							"key": "X-AspNet-Version",
+							"value": "4.0.30319"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?QzpcbWNvXEZ1ZW50ZXNcUFJVRUJBU1xWaXN1YWxTdHVkaW9cTU1BcGlcTWluaW1hcnRBcGlcTWluaW1hcnRBcGlcTWluaW1hcnRBcGlcYXBpXG1pbmltYXJ0XHByb2R1Y3RcbGlzdA==?="
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 12 May 2022 15:26:16 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1164"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"MinimartId\": 1,\n        \"MinimartName\": \"COCO Downtown\",\n        \"MinimartAdress\": \"340 Albert St Unit No G-06, Ottawa, ON K1R 7X7, Canadá\",\n        \"CategoryId\": 1,\n        \"CategoryName\": \"Soda\",\n        \"CategoryDescription\": null,\n        \"ProductId\": 2,\n        \"ProductName\": \"Coffee flavoured milk\",\n        \"ProductDescription\": null,\n        \"Price\": 10,\n        \"Stock\": 4,\n        \"MinimumStock\": 5\n    },\n    {\n        \"MinimartId\": 1,\n        \"MinimartName\": \"COCO Downtown\",\n        \"MinimartAdress\": \"340 Albert St Unit No G-06, Ottawa, ON K1R 7X7, Canadá\",\n        \"CategoryId\": 1,\n        \"CategoryName\": \"Soda\",\n        \"CategoryDescription\": null,\n        \"ProductId\": 1,\n        \"ProductName\": \"old Ice Tea\",\n        \"ProductDescription\": null,\n        \"Price\": 10,\n        \"Stock\": 10,\n        \"MinimumStock\": 5\n    },\n    {\n        \"MinimartId\": 2,\n        \"MinimartName\": \"COCO Mall\",\n        \"MinimartAdress\": \"250 City Centre Ave, Ottawa, ON K1R 6K7, Canadá\",\n        \"CategoryId\": 1,\n        \"CategoryName\": \"Soda\",\n        \"CategoryDescription\": null,\n        \"ProductId\": 3,\n        \"ProductName\": \"Nuke-Cola\",\n        \"ProductDescription\": null,\n        \"Price\": 10,\n        \"Stock\": 4,\n        \"MinimumStock\": 5\n    },\n    {\n        \"MinimartId\": 2,\n        \"MinimartName\": \"COCO Mall\",\n        \"MinimartAdress\": \"250 City Centre Ave, Ottawa, ON K1R 6K7, Canadá\",\n        \"CategoryId\": 1,\n        \"CategoryName\": \"Soda\",\n        \"CategoryDescription\": null,\n        \"ProductId\": 4,\n        \"ProductName\": \"Sprute\",\n        \"ProductDescription\": null,\n        \"Price\": 11,\n        \"Stock\": 10,\n        \"MinimumStock\": 5\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "Minimart Poduct Voucher Promos (todos los tipos de voucher de productos)",
@@ -213,6 +372,86 @@
 			"response": []
 		},
 		{
+			"name": "VirtualCart Product Vouchers (todos los tipos de voucher asociados a algun virtualCart)",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44386/api/VirtualCart/ProductVoucher/list",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44386",
+					"path": [
+						"api",
+						"VirtualCart",
+						"ProductVoucher",
+						"list"
+					],
+					"query": [
+						{
+							"key": "MinimartId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "MinimartName",
+							"value": "downtown",
+							"disabled": true
+						},
+						{
+							"key": "CustomerId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "CustomerFullName",
+							"value": "John",
+							"disabled": true
+						},
+						{
+							"key": "VoucherId",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "VoucherNum",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "CategoryId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "CategoryName",
+							"value": "soda",
+							"disabled": true
+						},
+						{
+							"key": "ProductId",
+							"value": "3",
+							"disabled": true
+						},
+						{
+							"key": "ProductName",
+							"value": "raviolo",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "VirtualCart Products (todos los productos en algun virtual cart)",
 			"protocolProfileBehavior": {
 				"strictSSL": false
@@ -264,84 +503,6 @@
 						{
 							"key": "CategoryName",
 							"value": "soda"
-						},
-						{
-							"key": "ProductId",
-							"value": "3",
-							"disabled": true
-						},
-						{
-							"key": "ProductName",
-							"value": "raviolo",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "VirtualCart Product Vouchers (todos los tipos de voucher asociados a algun virtualCart)",
-			"protocolProfileBehavior": {
-				"strictSSL": false
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:44386/api/VirtualCart/ProductVoucher/list?MinimartName=downtown&CustomerId=1",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44386",
-					"path": [
-						"api",
-						"VirtualCart",
-						"ProductVoucher",
-						"list"
-					],
-					"query": [
-						{
-							"key": "MinimartId",
-							"value": "1",
-							"disabled": true
-						},
-						{
-							"key": "MinimartName",
-							"value": "downtown"
-						},
-						{
-							"key": "CustomerId",
-							"value": "1"
-						},
-						{
-							"key": "CustomerFullName",
-							"value": "John",
-							"disabled": true
-						},
-						{
-							"key": "VoucherId",
-							"value": "0",
-							"disabled": true
-						},
-						{
-							"key": "VoucherNum",
-							"value": "1",
-							"disabled": true
-						},
-						{
-							"key": "CategoryId",
-							"value": "1",
-							"disabled": true
-						},
-						{
-							"key": "CategoryName",
-							"value": "soda",
-							"disabled": true
 						},
 						{
 							"key": "ProductId",

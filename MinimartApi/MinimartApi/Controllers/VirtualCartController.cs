@@ -20,13 +20,16 @@ namespace MinimartApi.Controllers
     public class VirtualCartController : ApiController
     {
 
-        //Business Classes reference
+        //references to business classes
         private BVirtualCartProduct vcproduct;
         private BVirtualCartVoucherPromo vcVoucherPromo;
+        private BVoucherPromo voucherPromo;
+
         VirtualCartController()
         {
             vcproduct = new BVirtualCartProduct();
             vcVoucherPromo = new BVirtualCartVoucherPromo();
+            voucherPromo = new BVoucherPromo(); 
         }
 
         // //////////////////////////
@@ -81,7 +84,9 @@ namespace MinimartApi.Controllers
             //search list of VirtualCartProduct
             IEnumerable<VirtualCartProductWDiscount> virtualCartProductWDiscount = // vcproduct.list(miniMartId, minimartName, customerId, customerFullName, productId, productName, categoryId, categoryName);
                                                                                    vcproduct.listWDiscount(miniMartId, minimartName, customerId, customerFullName, productId, productName, categoryId, categoryName);
-
+            /// product discount voucher
+            /// /////////////////////////
+            
             //serch list of VirtualCartProductVouchers
             IEnumerable <VirtualCartProductVoucher> virtualCartProductVoucher = vcVoucherPromo.listProductVoucher(miniMartId, minimartName, customerId, customerFullName, voucherId, voucherNum, categoryId, categoryName, productId, productName);
 
@@ -89,7 +94,6 @@ namespace MinimartApi.Controllers
             foreach ( var productWDiscount in virtualCartProductWDiscount )
             {
                 //filter if there is the product in some Voucher, and validate conditions
-                
                 var virtualCartProductVoucher_aux =  from v in virtualCartProductVoucher
                                                      where v.MinimartId == productWDiscount.MinimartId 
                                                          & v.CustomerId == productWDiscount.CustomerId 
@@ -105,14 +109,52 @@ namespace MinimartApi.Controllers
                     if (productVoucher.StartingWithXUnits <= productWDiscount.Units)
                     {
                         discount += ((productWDiscount.Price * productVoucher.PercentageDiscount / 100) * (productWDiscount.Units / productVoucher.StartingWithXUnits));
-                        discount_voucherId = productVoucher.VoucherId;
-                        discunt_voucherNUM = productVoucher.NumVoucher;
+                        //discount_voucherId = productVoucher.VoucherId; //can be more of one
+                        //discunt_voucherNUM = productVoucher.NumVoucher;
+                        productWDiscount.Voucher_Id_Num += "(" + discount_voucherId.ToString() + "," + discunt_voucherNUM.ToString() + ");";
                     }
                 }
                 productWDiscount.SubtotalWithDiscount = productWDiscount.SubtotalProduct - discount;
-                //productWDiscount.VoucherId = discount_voucherId;  //can be more of one
-                //productWDiscount.VoucherNum = discunt_voucherNUM;
-                productWDiscount.Voucher_Id_Num += "(" + discount_voucherId.ToString() + "," + discunt_voucherNUM.ToString() + ");";
+
+            }
+
+            /// category discount voucher
+            /// /////////////////////////
+
+            //serch list of VirtualCartProductVouchers
+            IEnumerable<VirtualCartCategoryVoucher> virtualCartCategoryVoucher = vcVoucherPromo.listCategoryVoucher(miniMartId, minimartName, customerId, customerFullName, voucherId, voucherNum, categoryId, categoryName); //, productId, productName);
+            
+            //for each VirtualCartProduct calculate the discount //cumulative discounts
+            foreach (var productWDiscount in virtualCartProductWDiscount)
+            {
+                //get the categoryVoucherPomo that apply to de product
+                var virtualCartCategotyVoucher_aux = from v in virtualCartCategoryVoucher
+                                                    where v.MinimartId == productWDiscount.MinimartId
+                                                        & v.CustomerId == productWDiscount.CustomerId
+                                                        & v.CategoryId == productWDiscount.CategoryId 
+                                                        & DateTime.Now >= v.StartDate & DateTime.Now <= v.EndDate
+                                                        & v.WeekDays.Contains(DateTime.Now.DayOfWeek.ToString())
+                                                    select v;
+
+                //serch excluded products
+               var excluded = voucherPromo.listCategoryVoucherPromo_ExcProduct(voucherId, categoryId, categoryName,productWDiscount.ProductId);
+
+               if (excluded.Count() == 0)
+                {//if not exclude
+                    float discount = 0;
+                    int discount_voucherId = 0;
+                    int discunt_voucherNUM = 0;
+                    foreach (var categoryVoucher in virtualCartCategotyVoucher_aux)
+                    {//for each voucher apply its discount
+                        if (categoryVoucher.StartingWithXUnits <= productWDiscount.Units)
+                        {
+                            discount += ((productWDiscount.Price * categoryVoucher.PercentageDiscount / 100) * (productWDiscount.Units / categoryVoucher.StartingWithXUnits));
+                            productWDiscount.Voucher_Id_Num += "(" + discount_voucherId.ToString() + "," + discunt_voucherNUM.ToString() + ");";
+                        }
+                    }
+                    productWDiscount.SubtotalWithDiscount = productWDiscount.SubtotalWithDiscount - discount;
+                }
+
             }
             return virtualCartProductWDiscount;
         }

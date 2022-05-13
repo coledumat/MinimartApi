@@ -145,6 +145,7 @@ namespace MinimartApi.Business
         // Business  categoryVoucherPromo
         // /////////////////////////
 
+
         /// <summary>
         /// List the categoryVouchers in the virtual cart of a minimart
         /// </summary>
@@ -154,19 +155,57 @@ namespace MinimartApi.Business
         /// <param name="customerFullName">full o partial name</param>
         /// <param name="voucherId">0 for all</param>
         /// <param name="voucherNum">0 for all</param>
-        /// <param name="categoryId">0 for all</param>
+        /// <param name="categoryId"> _category of the voucher_ or 0 for all</param>
         /// <param name="categoryName">full o partial name</param>
+        /// <param name="excludeProductId"></param>
+        /// <param name="excludProductName"></param>
         /// <returns>IEnumerable<VirtualCartCategoryVoucher></returns>
         public IEnumerable<VirtualCartCategoryVoucher> listCategoryVoucher(int minimartId, string minimartName,
-                                                             int customerId, string customerFullName,
-                                                             int voucherId, int voucherNum,
-                                                             int categoryId, string categoryName, int productId, string productName)
+                                                                             int customerId, string customerFullName,
+                                                                             int voucherId, int voucherNum,
+                                                                             int categoryId, string categoryName) //, int excludeProductId, string excludProductName)
         {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("minimart_id", minimartId);
+                parameters.Add("minimart_name", minimartName);
+                parameters.Add("customer_id", customerId);
+                parameters.Add("customer_fullName", customerFullName);
+                parameters.Add("voucher_id", voucherId);
+                parameters.Add("voucher_num", voucherNum);
+                parameters.Add("category_id", categoryId);     // _category of the voucher_
+                parameters.Add("category_name", categoryName);
+                //parameters.Add("exclude_product_id", excludeProductId); //TODO: excluded product have de same category of the voucher  _category of the voucher_
+                //parameters.Add("exclude_product_name", excludProductName);
 
-            return new List<VirtualCartCategoryVoucher> { };
+                var virtualCartCategoryVouchers = connection.Query<VirtualCartCategoryVoucher>("SP_VirtualCartCategoryVoucher", param: parameters, commandType: CommandType.StoredProcedure);
+                return virtualCartCategoryVouchers;
+            }
+
         }
 
 
+        //public IEnumerator<CategoryVoucherPromo_ExcProduct> listCategoryVoucherPromo_ExcProduct(int voucherId = 0, string voucherNum = "",
+        //                                                                                          int categoryId = 0, string categoryName = "", int excludeProductId = 0, string excludProductName = "")
+        //{
+        //    using (IDbConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        var parameters = new DynamicParameters();
+        //        parameters.Add("voucher_id", voucherId);
+        //        parameters.Add("voucher_num", voucherNum);
+        //        parameters.Add("category_id", categoryId);     // _category of the voucher_
+        //        parameters.Add("category_name", categoryName);
+        //        parameters.Add("exclude_product_id", excludeProductId); //TODO: excluded product have de same category of the voucher  _category of the voucher_
+        //        parameters.Add("exclude_product_name", excludProductName);
+
+        //        var CategoryVoucherPromo_ExcProduct = connection.Query<CategoryVoucherPromo_ExcProduct>("SP_VirtualCartCategoryVoucher", param: parameters, commandType: CommandType.StoredProcedure);
+        //        return virtualCartCategoryVouchers;
+        //    }
+        //}
+
     }
+
+
 
 }

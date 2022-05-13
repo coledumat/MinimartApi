@@ -34,9 +34,30 @@ namespace MinimartApi.Business
 
         }
 
+        /// <summary>
+        /// create stock of a product in a minimart
+        /// </summary>
+        /// <param name="newMinimartProduct"></param>
+        /// <returns></returns>
+        public int CreateMinimartProduct(MinimartProductModel newMinimartProduct)
+        {
+            int affectedRows = 0;
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = "INSERT INTO Minimart_Product ( Id_Minimart, Id_Product, Stock, MinimumStock) " +
+                                                  "VALUES ( @id_Minimart, @Id_Product, @Stock,@MinimumStock);";
 
+                affectedRows = connection.Execute(sql, new
+                {
+                    Id_Minimart = newMinimartProduct.MinimartId,
+                    Id_Product = newMinimartProduct.ProductId,
+                    Stock = newMinimartProduct.Stock,
+                    MinimumStock = newMinimartProduct.MinimumStock
+                });
+            }
 
-
+            return affectedRows;
+        }
 
 
     }

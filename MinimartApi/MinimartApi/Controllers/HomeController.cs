@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace MinimartApi.Controllers
 {
+    /// <summary>
+    /// example Home Controler 
+    /// </summary>
     public class HomeController : Controller
     {
         public ActionResult Index()

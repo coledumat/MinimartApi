@@ -30,7 +30,7 @@ namespace MinimartApi.Controllers
         // /////////////////////
 
         /// <summary>
-        /// List the products included in the Vouchers of a minimart
+        /// List the products included in the Vouchers of type product
         /// </summary>
         /// <param name="miniMartId">0 for all</param>
         /// <param name="minimartName">full o partial name</param>
@@ -129,58 +129,104 @@ namespace MinimartApi.Controllers
         //category Voucher Promo
         // ////////////////
 
+        /// <summary>
+        /// List category and the products excluded in the Vouchers of type category
+        /// </summary>
+        /// <param name="miniMartId"></param>
+        /// <param name="minimartName"></param>
+        /// <param name="voucherId"></param>
+        /// <param name="categoryId"></param>
+        /// <param name="categoryName"></param>
+        /// <param name="excludeProductId"></param>
+        /// <param name="excludeProductName"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/VoucherPromo/category/list")]
+        public IEnumerable<ProductVoucherPromo> GetCategoryVouchers(int miniMartId = 0, string minimartName = "",
+                                                                int voucherId = 0,
+                                                                int categoryId = 0, string categoryName = "", int excludeProductId = 0, string excludeProductName = "")
+        {
+            return vouchersPromos.listCategoryVoucherPromos(miniMartId, minimartName, voucherId, categoryId, categoryName, excludeProductId, excludeProductName);
+        }
 
+        /// <summary>
+        /// Create a new type of CategoryVoucherPromo 
+        /// </summary>
+        /// <param name="newCategoryVoucherPromo"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/VoucherPromo/category")]
-        public int PostCategoryVoucherPromo([FromBody] CategoryVoucherPromo newCategoryVoucherPromo)
-        {   //add a new type of CategoryVoucherPromo 
+        public IHttpActionResult PostCategoryVoucherPromo([FromBody] CategoryVoucherPromoModel newCategoryVoucherPromo)
+        {   /// insert into VoucherPromo, CategoryVoucherPromo and CategoryVoucherPromo_ExcProduct Tables
 
-            int id = 0;
-            //insert into VoucherPromo, CategoryVoucherPromo and CategoryVoucherPromo_ExcProduct Tables
-            return id;
+            //chek parameters
+            if (newCategoryVoucherPromo == null)
+            {
+                return BadRequest("Initialize parameters");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+
+            int result = vouchersPromos.CreateCategoryVoucherPromo(newCategoryVoucherPromo);
+
+            if (result == 1)
+                return Ok();
+            else
+                return InternalServerError();
         }
 
+        /// <summary>
+        /// update a VoucherPromo of ProductVoucherPromo type
+        /// </summary>
+        /// <param name="aCategoryVoucherPromo"></param>
+        /// <returns></returns>
         [HttpPut]
-        [Route("api/VoucherPromo/category")]
-        public void PutCategoryVoucherPromo([FromBody] CategoryVoucherPromo aCategoryVoucherPromo)
-        {   //update a VoucherPromo of categoryVoucherPromo type
+        [Route("api/VoucherPromo/category/{int id}")]
+        public IHttpActionResult PutCategoryVoucherPromo(int id,[FromBody] CategoryVoucherPromoModel aCategoryVoucherPromo)
+        {   //chek parameters
+            if (aCategoryVoucherPromo == null)
+            {
+                return BadRequest("Initialize parameters");
+            }
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+
+            int result = vouchersPromos.UpdateCategoryVoucherPromo(id, aCategoryVoucherPromo);
+
+            if (result == 1)
+                return Ok();
+            else
+                return InternalServerError();
         }
 
+        /// <summary>
+        /// delete a VoucherPromo of categoryVoucherPromo type
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete]
-        [Route("api/VoucherPromo/category")]
-        public void DeleteCategoryVoucherPromo(int id)
-        { //delete a VoucherPromo of categoryVoucherPromo type
+        [Route("api/VoucherPromo/category/{int id}")]
+        public IHttpActionResult DeleteCategoryVoucherPromo(int id)
+        { 
+          //chek parameters
+            if (id == 0)
+            {
+                return BadRequest("Initialize parameters");
+            }
 
-        }
+            int result = vouchersPromos.DeleteCategoryVoucherPromo(id);
 
-        /*
-        // GET: api/Voucher
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+            if (result == 1)
+                return Ok();
+            else
+                return InternalServerError();
         }
-
-        // GET: api/Voucher/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Voucher
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Voucher/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Voucher/5
-        public void Delete(int id)
-        {
-        }
-        */
     }
-}
+
+ }
+

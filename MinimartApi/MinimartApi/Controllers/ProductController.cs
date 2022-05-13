@@ -12,14 +12,13 @@ using MinimartApi.Models;
 namespace MinimartApi.Controllers
 {
 
-
+    /// <summary>
+    ///  CRUD methods of Categories and Products.
+    /// </summary>
     //<RoutePrefix("api/data/MinimartApi")> 'mco
     public class ProductController : ApiController
     {
-        /*
-         CRUD methods of Categories and Products.
-        */
-
+        //references to business classes
         private BProduct products;
         private BCategory categories;
 
@@ -42,7 +41,7 @@ namespace MinimartApi.Controllers
 
         [HttpPost]
         [Route("api/category")]
-        public int PostCategory([FromBody] Category newCategory)
+        public int PostCategory([FromBody] CategoryModel newCategory)
         {   //add a new category
 
             int id = 0;
@@ -51,8 +50,8 @@ namespace MinimartApi.Controllers
         }
 
         [HttpPut]
-        [Route("api/category")]
-        public void PutCategory([FromBody] Category aCategory)
+        [Route("api/category/{Int Id}")]
+        public void PutCategory(int Id, [FromBody] CategoryModel aCategory)
         {   //update a category 
 
         }
@@ -78,7 +77,7 @@ namespace MinimartApi.Controllers
 
         [HttpPost]
         [Route("api/product")]
-        public int PostProduct([FromBody] Product newProduct)
+        public int PostProduct([FromBody] ProductModel newProduct)
         {   //add a new type of product 
 
             int id = 0;
@@ -87,14 +86,14 @@ namespace MinimartApi.Controllers
         }
 
         [HttpPut]
-        [Route("api/product")]
-        public void PutProduct([FromBody] Product aProduct)
+        [Route("api/product/{int Id}")]
+        public void PutProduct(int Id, [FromBody] Product aProduct)
         {   //update a type of product 
 
         }
 
         [HttpDelete]
-        [Route("api/product")]
+        [Route("api/product/{int Id}")]
         public void DeleteProduct(int id)
         { //delete a type of product
 

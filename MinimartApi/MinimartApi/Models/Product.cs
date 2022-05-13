@@ -8,14 +8,17 @@ namespace MinimartApi.Models
     public class ProductModel
     {
         public int CategoryId { get; set; }
-        public int ProductId { get; set; }
         public String ProductName { get; set; }
         public String ProductDescription { get; set; }
         public float Price { get; set; }
     }
 
+    public class ProductVoucherModel : ProductModel
+    {
+        public int ProductId { get; set; }
+    }
 
-    public class Product: ProductModel
+    public class Product: ProductVoucherModel
     {
         public String CategoryName { get; set; }
     }
